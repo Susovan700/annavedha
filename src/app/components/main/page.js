@@ -1,90 +1,114 @@
-"use client"
-import React, { useState } from 'react';
-import { CheckCircle, Shield, Users, Globe, ArrowRight, Upload, Eye, Award, Zap, TrendingUp, Leaf } from 'lucide-react';
-import './main.css';
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  CheckCircle,
+  Shield,
+  Users,
+  Globe,
+  ArrowRight,
+  Upload,
+  Eye,
+  Award,
+  Zap,
+  TrendingUp,
+  Leaf,
+} from "lucide-react";
+import "./main.css";
 
 const HomePage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const router = useRouter();
+
   const workflowSteps = [
     {
       title: "Exporter Login & Batch Submission",
-      description: "Upload product information including type, quantity, location, and attachments like lab reports and packaging images.",
+      description:
+        "Upload product information including type, quantity, location, and attachments like lab reports and packaging images.",
       icon: <Upload className="workflow-step-icon-svg" />,
-      color: "green"
+      color: "green",
     },
     {
       title: "Quality Check Initiation",
-      description: "System matches batch to certified QA agency and schedules physical/virtual inspection.",
+      description:
+        "System matches batch to certified QA agency and schedules physical/virtual inspection.",
       icon: <Eye className="workflow-step-icon-svg" />,
-      color: "blue"
+      color: "blue",
     },
     {
       title: "Digital Product Passport (DPP)",
-      description: "QA agency updates inspection results and generates a W3C Verifiable Credential for the batch.",
+      description:
+        "QA agency updates inspection results and generates a W3C Verifiable Credential for the batch.",
       icon: <Award className="workflow-step-icon-svg" />,
-      color: "purple"
+      color: "purple",
     },
     {
       title: "Verification by Importers/Customs",
-      description: "Importer or customs scans QR code to verify who issued the certificate and when it was issued.",
+      description:
+        "Importer or customs scans QR code to verify who issued the certificate and when it was issued.",
       icon: <Shield className="workflow-step-icon-svg" />,
-      color: "orange"
-    }
+      color: "orange",
+    },
   ];
 
   const features = [
     {
       icon: <Upload className="feature-icon feature-icon-green" />,
       title: "Upload Product Details",
-      description: "Submit comprehensive product information including rice, wheat, spices with supporting documentation."
+      description:
+        "Submit comprehensive product information including rice, wheat, spices with supporting documentation.",
     },
     {
       icon: <Eye className="feature-icon feature-icon-blue" />,
       title: "Quality Inspections",
-      description: "Professional QA agencies conduct thorough physical and virtual inspections of your products."
+      description:
+        "Professional QA agencies conduct thorough physical and virtual inspections of your products.",
     },
     {
       icon: <Award className="feature-icon feature-icon-purple" />,
       title: "Digital Certificates",
-      description: "Receive W3C compliant Verifiable Credentials stored securely in your Inji wallet."
+      description:
+        "Receive W3C compliant Verifiable Credentials stored securely in your Inji wallet.",
     },
     {
       icon: <Shield className="feature-icon feature-icon-orange" />,
       title: "Instant Verification",
-      description: "QR code verification enables instant authentication before import/export processes."
-    }
+      description:
+        "QR code verification enables instant authentication before import/export processes.",
+    },
   ];
 
   const stats = [
     { number: "500+", label: "Certified QA Agencies" },
     { number: "10K+", label: "Products Certified" },
     { number: "50+", label: "Countries Supported" },
-    { number: "99.9%", label: "Verification Accuracy" }
+    { number: "99.9%", label: "Verification Accuracy" },
   ];
 
   return (
     <div className="homepage-container">
-      {/* Animated Background Elements */}
       <div className="floating-bg-1"></div>
       <div className="floating-bg-2"></div>
       <div className="floating-bg-3"></div>
-
-      {/* Hero Section */}
       <div className="hero-section">
         <div className="hero-title-container">
           <Leaf className="hero-icon" />
           <h1 className="hero-title">AgriQCert Portal</h1>
         </div>
         <p className="hero-subtitle">
-          Digitize and secure your agricultural export/import certification process with 
-          W3C Verifiable Credentials and blockchain-based trust.
+          Digitize and secure your agricultural export/import certification
+          process with W3C Verifiable Credentials and blockchain-based trust.
         </p>
         <div className="hero-buttons">
-          <button className="btn-primary">
+          <button
+            className="btn-primary"
+            onClick={() => router.push("/export")}
+          >
             Get Started as Exporter
             <ArrowRight className="btn-icon" />
           </button>
+
           <button className="btn-secondary">
             QA Agency Portal
             <Shield className="btn-icon" />
@@ -99,39 +123,31 @@ const HomePage = () => {
               Comprehensive Quality Certification Platform
             </h2>
             <p className="features-subtitle">
-              From batch submission to international verification, streamline your entire 
-              agricultural certification workflow with cutting-edge technology.
+              From batch submission to international verification, streamline
+              your entire agricultural certification workflow with cutting-edge
+              technology.
             </p>
           </div>
 
           <div className="features-grid">
             {features.map((feature, index) => (
               <div key={index} className="feature-card">
-                <div className="feature-icon-container">
-                  {feature.icon}
-                </div>
-                <h3 className="feature-title">
-                  {feature.title}
-                </h3>
-                <p className="feature-description">
-                  {feature.description}
-                </p>
+                <div className="feature-icon-container">{feature.icon}</div>
+                <h3 className="feature-title">{feature.title}</h3>
+                <p className="feature-description">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      
       <div className="workflow-section">
         <div className="workflow-container">
           <div className="workflow-header">
-            <h2 className="workflow-title">
-              How It Works
-            </h2>
+            <h2 className="workflow-title">How It Works</h2>
             <p className="workflow-subtitle">
-              Our streamlined 4-step process ensures efficient certification 
-              and verification of agricultural products.
+              Our streamlined 4-step process ensures efficient certification and
+              verification of agricultural products.
             </p>
           </div>
 
@@ -140,7 +156,9 @@ const HomePage = () => {
               {workflowSteps.map((step, index) => (
                 <div
                   key={index}
-                  className={`workflow-step ${activeStep === index ? 'active' : ''}`}
+                  className={`workflow-step ${
+                    activeStep === index ? "active" : ""
+                  }`}
                   onClick={() => setActiveStep(index)}
                 >
                   <div className="workflow-step-content">
@@ -157,7 +175,9 @@ const HomePage = () => {
             </div>
             <div className="workflow-detail">
               <div className="workflow-detail-header">
-                <div className={`workflow-detail-icon ${workflowSteps[activeStep].color}`}>
+                <div
+                  className={`workflow-detail-icon ${workflowSteps[activeStep].color}`}
+                >
                   {workflowSteps[activeStep].icon}
                 </div>
                 <h3 className="workflow-detail-title">
@@ -176,12 +196,8 @@ const HomePage = () => {
           <div className="stats-grid">
             {stats.map((stat, index) => (
               <div key={index} className="stat-item">
-                <div className="stat-number">
-                  {stat.number}
-                </div>
-                <div className="stat-label">
-                  {stat.label}
-                </div>
+                <div className="stat-number">{stat.number}</div>
+                <div className="stat-label">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -193,16 +209,19 @@ const HomePage = () => {
             Ready to Transform Your Agricultural Certification Process?
           </h2>
           <p className="cta-subtitle">
-            Join thousands of exporters, QA agencies, and importers who trust 
+            Join thousands of exporters, QA agencies, and importers who trust
             AgriQCert for secure, verifiable agricultural certifications.
           </p>
           <div className="cta-buttons">
-            <button className="btn-primary">
-              Start Your First Certification
+            <button
+              className="btn-primary"
+              onClick={() => router.push("/import")}
+            >
+              Get Started As Importer
               <Zap className="btn-icon" />
             </button>
             <button className="btn-secondary">
-              Learn More
+              Download App
               <TrendingUp className="btn-icon" />
             </button>
           </div>
@@ -217,7 +236,8 @@ const HomePage = () => {
                 AgriQCert
               </h3>
               <p>
-                Securing agricultural trade through blockchain-verified certifications.
+                Securing agricultural trade through blockchain-verified
+                certifications.
               </p>
             </div>
             <div className="footer-section">
